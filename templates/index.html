@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel = "icon" href = "{{ url_for('static', filename='logos/dict2.jpeg') }}" type = "image/x-icon"> 
+<center>
+<div class="container p-3 my-3 bg-primary text-white">
+  
+        <h1>Welcome to MyDictionary App </h1>
+          </div>
+         <div class="form-group">
+          <form action="/" method="post">
+          <div class="container p-3 my-3 bg-dark text-white">
+
+           <h2 class="text text-primary"><label for='srh'>Search:</label></h2> 
+           
+           <input class="form-control" id='srh' type="search" name="search" placeholder="Ex:Happy,love,animals....">
+          
+          </div>
+          <br>
+               <div class="container p-3 my-3 bg-dark text-white">
+              <input id='srh' class="btn btn-primary" type="submit" name="submit">
+              </div>
+          </form>
+          </div>
+</center> 
+               {% if meanings[given[0]]!=0 %}
+               <div>
+                  <center>
+                      <input type="button" name="button" class="btn btn-info" value="Take a Print." onclick="window.print()" />
+                  </center>
+                </div>
+                <br>
+                    {% for i,j in meanings.items() %}
+                <div class="container">
+                  <div class="well">
+                    <h2 container p-3 my-3 bg-dark text-white>
+                      <b class="text-primary">{{ i }}</b>
+                    </h2>
+
+                      {% if j %}                     
+                           {% for part,mean in j.items() %}
+                                    <i class="text-muted">{{ part }}</i><br>
+                                    {% for meaning in mean %}
+
+                                       <p><b>{{ meaning }}</b></p>
+
+                                    {% endfor %}
+
+                                  {% endfor %}
+
+
+                            <h2 container p-3 my-3 bg-dark text-white>
+                              <b class="text-primary">Synonyms of {{ i }}:</b>
+                            </h2>
+                            {% if synos[i] %}
+                            <p><b>{{ synos[i] }}</b></p> 
+                          
+                          {% else %}
+                            <h2 container p-3 my-3 bg-dark text-white>
+                              <b class="text-warning">No Synonyms!</b>
+                            </h2>
+                            {% endif %}
+
+                            <h2 container p-3 my-3 bg-dark text-white>
+                              <b class="text-primary">Antonyms of {{ i }}:</b>
+                            </h2>
+                            {% if antos[i] %} 
+                            <p><b>{{ antos[i] }}</b></p>
+                            {% else %}
+                            <h2 container p-3 my-3 bg-dark text-white>
+                              <b class="text-warning">No Antonyms!</b>
+                            </h2>
+                            {% endif %}
+                            </div></div>
+                          {% else %}
+ 
+                           <h2 container p-3 my-3 bg-dark text-white>
+                                <b class="text text-danger">
+                                  Error!
+                                </b><br>
+                                <ul>
+                                  <li>
+                                    <b class="text text-danger">
+                                       Please check the word you typed.
+                                    </b>
+                                  </li>
+                                  <li>
+                                    <b class="text text-danger">
+                                      Make sure your internet is connected.
+                                    </b>
+                                  </li>
+                              </ul>
+
+                            </h2>
+                            </div></div>
+
+                  {% endif %}            
+                    {% endfor %}
+  
+
+                {% endif %}
+{% endblock %}
