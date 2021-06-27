@@ -1,11 +1,5 @@
-
-
 Flask==1.1.2
-
 gunicorn==20.1.0
-
 itsdangerous==1.1.0
-
 Jinja2==2.11.2
-
 PyDictionary==2.0.1
